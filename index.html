@@ -1,7 +1,7 @@
 <h1> sionify </h1>
 <section id="wild-rift-tournaments">
   <h2>Wild Rift Tournaments</h2>
-  <p>Wild Rift tournaments for a chance to win Bitcoin.</p>
+  <p>Welcome to the most diabolical League of Legends: Wild Rift tournament on the planet! For just 1€ worth of Bitcoin, you can enter our evil tournament and compete against other players for a chance to win big! But be warned, the stakes are high and the competition is fierce.</p>
   <ul>
     <li>
       <div class="tournament-info">
@@ -9,7 +9,7 @@
         <p>Entry fee: 0.1 BTC</p>
         <p>Prize: 1 BTC</p>
       </div>
-      <button class="join-tournament-button" data-tournament-id="1" onclick="joinWaitingRoom(1)">Join</button>
+      <button class="join-tournament-button" data-tournament-id="1">Join</button>
     </li>
     <li>
       <div class="tournament-info">
@@ -17,60 +17,46 @@
         <p>Entry fee: 0.05 BTC</p>
         <p>Prize: 0.5 BTC</p>
       </div>
-      <button class="join-tournament-button" data-tournament-id="2" onclick="joinWaitingRoom(2)">Join</button>
+      <button class="join-tournament-button" data-tournament-id="2">Join</button>
     </li>
   </ul>
 </section>
-<script>
-  function joinWaitingRoom(tournamentId) {
-    // Code to add player to the waiting room for the specified tournament
-    // You could use a database or an API to store and retrieve waiting room data
-    alert("You have joined the waiting room for tournament " + tournamentId + ". Please wait for other players to join.");
-  }
-</script>
-  <head>
-    <title>Evil Website</title>
-    <style>
-      body {
-        background-color: black;
-        color: red;
-        font-family: Impact, fantasy;
-        font-size: 3em;
-        text-align: center;
+<head>
+  <title>Evil Website</title>
+  <style>
+    body {
+      background-color: black;
+      color: red;
+      font-family: Impact, fantasy;
+      font-size: 3em;
+      text-align: center;
+    }
+    #message {
+      animation: shake 0.5s infinite;
+    }
+    @keyframes shake {
+      0% {transform: translate(0,0);}
+      10% {transform: translate(10px,10px);}
+      20% {transform: translate(-10px,10px);}
+      30% {transform: translate(10px,-10px);}
+      40% {transform: translate(-10px,-10px);}
+      50% {transform: translate(10px,10px);}
+      60% {transform: translate(-10px,10px);}
+      70% {transform: translate(10px,-10px);}
+      80% {transform: translate(-10px,-10px);}
+    }
+    #fly-in {
+      animation: fly-in 2s ease;
+    }
+    @keyframes fly-in {
+      0% {
+        opacity: 0;
+        transform: translateY(-100%);
       }
-      #message {
-        animation: shake 0.5s infinite;
+      100% {
+        opacity: 1;
+        transform: translateY(0);
       }
-      @keyframes shake {
-        0% {transform: translate(0,0);}
-        10% {transform: translate(10px,10px);}
-        20% {transform: translate(-10px,10px);}
-        30% {transform: translate(10px,-10px);}
-        40% {transform: translate(-10px,-10px);}
-        50% {transform: translate(10px,10px);}
-        60% {transform: translate(-10px,10px);}
-        70% {transform: translate(10px,-10px);}
-        80% {transform: translate(-10px,-10px);}
-        90% {transform: translate(10px,10px);}
-        100% {transform: translate(-10px,-10px);}
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Welcome to my Evil Website!</h1>
-    <p id="message">You have been cursed!</p>
-    <script>
-      var message = document.getElementById("message");
-      setInterval(function() {
-        message.style.color = getRandomColor();
-      }, 200);
-      function getRandomColor() {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-      }
-    </script>
-  </body>
+    }
+  </style>
+</head>
