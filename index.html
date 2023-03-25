@@ -30,27 +30,12 @@
       left: -100%;
       font-size: 5em;
       color: red;
-      animation: slide-in 2s ease-in-out forwards, loop-right 4s ease-in-out infinite;
+      animation: loop-right 4s ease-in-out infinite;
     }
 
     @keyframes slide-in {
       100% {
         left: 50%;
-      }
-    }
-
-    @keyframes loop-right {
-      0% {
-        left: -100%;
-      }
-      50% {
-        transform: rotate(10deg);
-        color: #ff0000;
-      }
-      100% {
-        left: 100%;
-        transform: rotate(90deg) scale(0.8);
-        color: #00ff00;
       }
     }
   </style>
