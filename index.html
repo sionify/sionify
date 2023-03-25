@@ -24,65 +24,65 @@
 <head>
   <title>Evil Website</title>
   <style>
-  body {
-  margin: 0;
-  padding: 0;
-  background-color: #000;
-}
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+    }
 
-#header {
-  position: relative;
-  height: 50px;
-  line-height: 50px;
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  font-size: 24px;
-}
+    #header {
+      position: relative;
+      height: 50px;
+      line-height: 50px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      font-size: 24px;
+    }
 
-#wild-rift-tournaments {
-  position: relative;
-  height: 100vh;
-  background-image: url('https://www.example.com/background.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+    #wild-rift-tournaments {
+      position: relative;
+      height: 100vh;
+      background-image: url('https://www.example.com/background.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
 
-#wild-rift-tournaments h2 {
-  position: absolute;
-  top: 50%;
-  left: -100%;
-  font-size: 5em;
-  color: red;
-  animation: slide-in 2s ease-in-out forwards, loop-right 4s ease-in-out infinite;
-}
+    #wild-rift-tournaments h2 {
+      position: absolute;
+      top: 50%;
+      left: -100%;
+      font-size: 5em;
+      color: red;
+      animation: slide-in 2s ease-in-out forwards, loop-right 4s ease-in-out infinite;
+    }
 
-@keyframes slide-in {
-  100% { left: 50%; }
-}
+    @keyframes slide-in {
+      100% {
+        left: 50%;
+      }
+    }
 
-@keyframes loop-right {
-  0% { left: -100%; }
-  20% { left: 20%; }
-  80% { left: 100%; }
-  100% { left: 100%; }
-}
-
-#footer {
-  position: relative;
-  height: 50px;
-  line-height: 50px;
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  font-size: 18px;
-}
-
-@media only screen and (max-width: 768px) {
-  #header, #footer {
-    font-size: 16px;
-  }
-}
-
+    @keyframes loop-right {
+      0% {
+        left: -100%;
+      }
+      50% {
+        transform: rotate(10deg);
+        color: #ff0000;
+      }
+      100% {
+        left: 100%;
+        transform: rotate(90deg) scale(0.8);
+        color: #00ff00;
+      }
+    }
   </style>
 </head>
+<body>
+  <div id="header">Evil Website</div>
+  <div id="wild-rift-tournaments">
+    <h2>Welcome to our Tournaments!</h2>
+  </div>
+</body>
+  
