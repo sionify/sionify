@@ -1,7 +1,7 @@
 <h1> sionify </h1>
 <section id="wild-rift-tournaments">
   <h2>Wild Rift Tournaments</h2>
-  <p>Join our Wild Rift tournaments for a chance to win Bitcoin prizes!</p>
+  <p>Wild Rift tournaments for a chance to win Bitcoin.</p>
   <ul>
     <li>
       <div class="tournament-info">
@@ -9,7 +9,7 @@
         <p>Entry fee: 0.1 BTC</p>
         <p>Prize: 1 BTC</p>
       </div>
-      <button class="join-tournament-button" data-tournament-id="1">Join</button>
+      <button class="join-tournament-button" data-tournament-id="1" onclick="joinWaitingRoom(1)">Join</button>
     </li>
     <li>
       <div class="tournament-info">
@@ -17,10 +17,17 @@
         <p>Entry fee: 0.05 BTC</p>
         <p>Prize: 0.5 BTC</p>
       </div>
-      <button class="join-tournament-button" data-tournament-id="2">Join</button>
+      <button class="join-tournament-button" data-tournament-id="2" onclick="joinWaitingRoom(2)">Join</button>
     </li>
   </ul>
 </section>
+<script>
+  function joinWaitingRoom(tournamentId) {
+    // Code to add player to the waiting room for the specified tournament
+    // You could use a database or an API to store and retrieve waiting room data
+    alert("You have joined the waiting room for tournament " + tournamentId + ". Please wait for other players to join.");
+  }
+</script>
   <head>
     <title>Evil Website</title>
     <style>
