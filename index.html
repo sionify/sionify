@@ -36,6 +36,63 @@
         changeColor();
       }
       document.addEventListener("click", nextPage);
+      // Define a deck of cards
+const suits = ["♥", "♦", "♠", "♣"];
+const values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+let deck = [];
+
+for (let suit of suits) {
+  for (let value of values) {
+    deck.push(value + suit);
+  }
+}
+
+// Shuffle the deck
+function shuffleDeck(deck) {
+  for (let i = deck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [deck[i], deck[j]] = [deck[j], deck[i]];
+  }
+}
+
+shuffleDeck(deck);
+
+// Deal cards to players
+let player1 = [deck.pop(), deck.pop()];
+let player2 = [deck.pop(), deck.pop()];
+
+// Define the table
+let table = ["", "", "", "", ""];
+let pot = 0;
+
+// Display the table and the players' hands
+console.log("Table:");
+console.log("+---+---+---+---+---+");
+console.log("| " + table[0] + " | " + table[1] + " | " + table[2] + " | " + table[3] + " | " + table[4] + " |");
+console.log("+---+---+---+---+---+");
+console.log("Player 1: " + player1.join(" "));
+console.log("Player 2: " + player2.join(" "));
+
+// Prompt the players for their actions
+let player1Action = prompt("Player 1: What do you want to do? (check, bet, fold)");
+let player2Action = prompt("Player 2: What do you want to do? (check, bet, fold)");
+
+// Update the table and the pot based on the players' actions
+if (player1Action === "bet") {
+  pot += 10;
+} else if (player2Action === "bet") {
+  pot += 10;
+}
+
+// Display the updated table and the players' hands
+console.log("Table:");
+console.log("+---+---+---+---+---+");
+console.log("| " + table[0] + " | " + table[1] + " | " + table[2] + " | " + table[3] + " | " + table[4] + " |");
+console.log("+---+---+---+---+---+");
+console.log("Player 1: " + player1.join(" "));
+console.log("Player 2: " + player2.join(" "));
+console.log("Pot: " + pot);
+
     </script>
   </head>
   <body>
