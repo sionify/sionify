@@ -1,35 +1,118 @@
-<h1> sionify </h1> 
- <section id="wild-rift-tournaments">
-   <h2>Wild Rift Tournaments</h2>
-   <p>Welcome to the most diabolical League of Legends: Wild Rift tournament on the planet! For just 1 token, you can enter</p>
-   <ul>
-     <li>
-       <div class="tournament-info">
-         <h3>Tournament 1</h3>
-         <p>Entry fee: x token</p>
-         <p>Prize: x*2 token</p>
-       </div>
-       <button class="join-tournament-button" data-tournament-id="1">Join</button>
-     </li>
-     <li>
-       <div class="tournament-info">
-         <h3>Tournament 2</h3>
-         <p>Entry fee: x token</p>
-         <p>Prize: x*10 token</p>
-       </div>
-       <button class="join-tournament-button" data-tournament-id="2">Join</button>
-     </li>
-   </ul>
- </section>
- <head>
-   <title>Wild Rift Tournaments</title>
-   <style>
-     body {
-       background-color: black;
-       color: red;
-       font-family: Impact, fantasy;
-       font-size: 3em;
-       text-align: center;
-     }
-   </style>
- </head>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sionify - Top Hashtags</title>
+    <style>
+      /* reset default styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+       /* header styles */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #f1f1f1;
+  }
+
+  /* logo styles */
+  .logo {
+    font-size: 32px;
+    font-weight: bold;
+    color: #1a73e8;
+  }
+
+  /* search bar styles */
+  .search {
+    display: flex;
+    flex: 1;
+    margin-left: 20px;
+    padding: 10px;
+    border-radius: 30px;
+    border: 1px solid #dfe1e5;
+  }
+
+  .search input {
+    flex: 1;
+    margin-left: 10px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+  }
+
+  /* top hashtags styles */
+  .hashtags {
+    margin: 50px auto;
+    width: 600px;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .hashtags h1 {
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+
+  .hashtags ul {
+    list-style: none;
+    margin-bottom: 20px;
+  }
+
+  .hashtags li {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 30px;
+    font-weight: bold;
+    color: #1a73e8;
+  }
+
+  .hashtags li:hover {
+    background-color: #e0e0e0;
+  }
+
+  /* footer styles */
+  footer {
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    color: #757575;
+  }
+</style>
+</head>
+  <body>
+    <header>
+      <div class="logo">Sionify</div>
+      <div class="search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" placeholder="Search...">
+      </div>
+   </header>
+   <div class="hashtags">
+    <h1>Top Hashtags</h1>
+    <ul>
+      <li>#sionify</li>
+      <li>#digitalmarketing</li>
+      <li>#onlinemarketing</li>
+      <li>#webdesign</li>
+      <li>#socialmedia</li>
+      <li>#SEO</li>
+      <li>#contentmarketing</li>
+    </ul>
+  </div>
+  <main>
+    <h1>Welcome to Sionify</h1>
+    <p>We offer a wide range of digital marketing services to help businesses grow and reach their full potential. Our team of experts is dedicated to providing high-quality solutions tailored to your needs.</p>
+    <a href="#" class="cta">Get Started</a>
+  </main>
+  <footer>
+    <p>&copy; 2023 Sionify. All rights reserved.</p>
+  </footer>
+</div>
+   
