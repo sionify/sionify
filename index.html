@@ -1,4 +1,25 @@
-<h1> sionify </h1>
+<script>
+const password = prompt("Enter the password:");
+
+if (password === "123123abcabc") {
+  document.querySelector("h1").textContent = "Sionify - W";
+  document.querySelectorAll(".join-tournament-button").forEach((button) => {
+    button.addEventListener("click", () => {
+      const tournamentId = button.dataset.tournamentId;
+      const entryFee = tournamentId === "1" ? "x" : "x";
+      const prize = tournamentId === "1" ? "2x" : "10x";
+      alert(`You joined Tournament ${tournamentId} with an entry fee of ${entryFee} token(s) and a prize of ${prize} token(s)!`);
+    });
+  });
+} else {
+  document.querySelector("h1").textContent = "Access Denied - L";
+  document.querySelector("#wild-rift-tournaments").remove();
+  document.body.style.backgroundColor = "red";
+  document.body.innerHTML += "<h2 id='message'>Wrong password. You are not worthy to join our tournaments!</h2>";
+}
+
+</script>
+<h1> sionify </h1> 
  <section id="wild-rift-tournaments">
    <h2>Wild Rift Tournaments</h2>
    <p>Welcome to the most diabolical League of Legends: Wild Rift tournament on the planet! For just 1 token, you can enter</p>
