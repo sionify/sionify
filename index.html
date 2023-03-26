@@ -1,75 +1,62 @@
-<head>
-  <title>Evil Website</title>
-  <style>
-      body {
-          margin: 0;
-          padding: 0;
-          background-color: #000;
-    }
-    
-    p {
-      color: #fff;
-      }
-
-    #header {
-      position: relative;
-      height: 50px;
-      line-height: 50px;
-      background-color: #333;
-      color: #fff;
-      text-align: center;
-      font-size: 24px;
-    }
-
-    #wild-rift-tournaments {
-      position: relative;
-      height: 100vh;
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-
-    #wild-rift-tournaments h2 {
-      position: absolute;
-      top: 50%;
-      left: -100%;
-      font-size: 5em;
-      color: red;
-      animation: loop-right 4s ease-in-out infinite;
-    }
-
-    @keyframes slide-in {
-      100% {
-        left: 50%;
-      }
-    }
-  </style>
-</head>
 <h1> sionify </h1>
-<section id="wild-rift-tournaments">
-  <h2>Wild Rift Tournaments</h2>
-  <p>Welcome to the most diabolical League of Legends: Wild Rift tournament on the planet! For just 1€ worth of Bitcoin, you can enter our evil tournament and compete against other players for a chance to win big! But be warned, the stakes are high and the competition is fierce.</p>
-  <ul>
-    <li>
-      <div class="tournament-info">
-        <h3>Tournament 1</h3>
-        <p>Entry fee: 0.1 BTC</p>
-        <p>Prize: 1 BTC</p>
-      </div>
-      <button class="join-tournament-button" data-tournament-id="1">Join</button>
-    </li>
-    <li>
-      <div class="tournament-info">
-        <h3>Tournament 2</h3>
-        <p>Entry fee: 0.05 BTC</p>
-        <p>Prize: 0.5 BTC</p>
-      </div>
-      <button class="join-tournament-button" data-tournament-id="2">Join</button>
-    </li>
-  </ul>
-</section>
-<body>
-  <div id="wild-rift-tournaments">
-    <h2>Welcome to our Tournaments!</h2>
-  </div>
-</body>
-  
+ <section id="wild-rift-tournaments">
+   <h2>Wild Rift Tournaments</h2>
+   <p>Welcome to the most diabolical League of Legends: Wild Rift tournament on the planet! For just 1€ worth of Bitcoin, you can enter our evil tournament and compete against other players for a chance to win big! But be warned, the stakes are high and the competition is fierce.</p>
+   <ul>
+     <li>
+       <div class="tournament-info">
+         <h3>Tournament 1</h3>
+         <p>Entry fee: 0.1 BTC</p>
+         <p>Prize: 1 BTC</p>
+       </div>
+       <button class="join-tournament-button" data-tournament-id="1">Join</button>
+     </li>
+     <li>
+       <div class="tournament-info">
+         <h3>Tournament 2</h3>
+         <p>Entry fee: 0.05 BTC</p>
+         <p>Prize: 0.5 BTC</p>
+       </div>
+       <button class="join-tournament-button" data-tournament-id="2">Join</button>
+     </li>
+   </ul>
+ </section>
+ <head>
+   <title>Evil Website</title>
+   <style>
+     body {
+       background-color: black;
+       color: red;
+       font-family: Impact, fantasy;
+       font-size: 3em;
+       text-align: center;
+     }
+     #message {
+       animation: shake 0.5s infinite;
+     }
+     @keyframes shake {
+       0% {transform: translate(0,0);}
+       10% {transform: translate(10px,10px);}
+       20% {transform: translate(-10px,10px);}
+       30% {transform: translate(10px,-10px);}
+       40% {transform: translate(-10px,-10px);}
+       50% {transform: translate(10px,10px);}
+       60% {transform: translate(-10px,10px);}
+       70% {transform: translate(10px,-10px);}
+       80% {transform: translate(-10px,-10px);}
+     }
+     #fly-in {
+       animation: fly-in 2s ease;
+     }
+     @keyframes fly-in {
+       0% {
+         opacity: 0;
+         transform: translateY(-100%);
+       }
+       100% {
+         opacity: 1;
+         transform: translateY(0);
+       }
+     }
+   </style>
+ </head>
