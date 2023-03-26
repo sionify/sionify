@@ -34,6 +34,32 @@
 			document.getElementById("sionify").style.fontSize = (3 - pages%3) + "em";
 			document.getElementById("sionify").style.zIndex = pages + 1 + 999999;
 		});
+		
+		var pageCounter = 1;
+      function addPage() {
+        var page = document.createElement("div");
+        page.id = "page" + pageCounter;
+        page.style.position = "absolute";
+        page.style.top = "50%";
+        page.style.left = "50%";
+        page.style.transform = "translate(-50%, -50%)";
+        page.style.backgroundColor = "hsl(" + pageCounter * 10 % 360 + ", 100%, 50%)";
+        page.style.width = (100 - pageCounter) + "%";
+        page.style.height = (100 - pageCounter) + "%";
+        page.style.zIndex = pageCounter;
+        document.body.appendChild(page);
+        pageCounter++;
+        var sionify = document.getElementById("sionify");
+        sionify.style.color = "hsl(" + (pageCounter * 10 + 180) % 360 + ", 100%, 50%)";
+        sionify.style.fontSize = (30 - pageCounter) + "px";
+        sionify.style.fontFamily = getRandomFont();
+        sionify.style.top = Math.random() * 100 + "%";
+        sionify.style.left = Math.random() * 100 + "%";
+      }
+      function getRandomFont() {
+        var fonts = ["Arial", "Times New Roman", "Comic Sans MS", "Impact", "Courier New"];
+        return fonts[Math.floor(Math.random() * fonts.length)];
+      }
 	</script>
 </body>
 </html>
