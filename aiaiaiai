@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Sionify - The Ultimate Evil</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: black;
+        color: white;
+        font-family: Arial, sans-serif;
+      }
+
+      header {
+        height: 50px;
+        background-color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+      }
+
+      main {
+        background-image: url('https://www.example.com/background.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: calc(100vh - 50px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 48px;
+        margin-bottom: 0;
+        text-align: center;
+        text-shadow: 2px 2px 0 #ff0000;
+      }
+
+      p {
+        font-size: 24px;
+        text-align: center;
+        margin-top: 0;
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #ff0000;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 24px;
+        cursor: pointer;
+        transition: background-color 0.5s ease;
+      }
+
+      button:hover {
+        background-color: #990000;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      Sionify
+    </header>
+    <main>
+      <h1>Welcome to the Dark Side</h1>
+      <p>Join us and unleash your evil side</p>
+      <button>Join Now</button>
+    </main>
+  </body>
+</html>
