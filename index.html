@@ -1,103 +1,79 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Sionify</title>
-    <style>
-      #sionify {
-        font-family: Impact, Charcoal, sans-serif;
-        font-size: 100px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 9999;
-        color: #ffffff;
-      }
-    </style>
-    <script>
-      let hue = 0;
-      let size = 100;
-      function changeColor() {
-        hue += 10;
-        document.body.style.backgroundColor = `hsl(${hue}, 100%, 50%)`;
-        document.getElementById("sionify").style.color = `hsl(${(hue + 180) % 360}, 100%, 50%)`;
-      }
-      function nextPage() {
-        size -= 5;
-        let page = document.createElement("div");
-        page.style.width = `${size}%`;
-        page.style.height = "100%";
-        page.style.position = "absolute";
-        page.style.top = "0";
-        page.style.left = "0";
-        page.style.backgroundColor = `hsl(${hue}, 100%, 50%)`;
-        page.style.zIndex = "-1";
-        document.body.appendChild(page);
-        changeColor();
-      }
-      document.addEventListener("click", nextPage);
-      // Define a deck of cards
-const suits = ["♥", "♦", "♠", "♣"];
-const values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
-let deck = [];
-
-for (let suit of suits) {
-  for (let value of values) {
-    deck.push(value + suit);
-  }
-}
-
-// Shuffle the deck
-function shuffleDeck(deck) {
-  for (let i = deck.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [deck[i], deck[j]] = [deck[j], deck[i]];
-  }
-}
-
-shuffleDeck(deck);
-
-// Deal cards to players
-let player1 = [deck.pop(), deck.pop()];
-let player2 = [deck.pop(), deck.pop()];
-
-// Define the table
-let table = ["", "", "", "", ""];
-let pot = 0;
-
-// Display the table and the players' hands
-console.log("Table:");
-console.log("+---+---+---+---+---+");
-console.log("| " + table[0] + " | " + table[1] + " | " + table[2] + " | " + table[3] + " | " + table[4] + " |");
-console.log("+---+---+---+---+---+");
-console.log("Player 1: " + player1.join(" "));
-console.log("Player 2: " + player2.join(" "));
-
-// Prompt the players for their actions
-let player1Action = prompt("Player 1: What do you want to do? (check, bet, fold)");
-let player2Action = prompt("Player 2: What do you want to do? (check, bet, fold)");
-
-// Update the table and the pot based on the players' actions
-if (player1Action === "bet") {
-  pot += 10;
-} else if (player2Action === "bet") {
-  pot += 10;
-}
-
-// Display the updated table and the players' hands
-console.log("Table:");
-console.log("+---+---+---+---+---+");
-console.log("| " + table[0] + " | " + table[1] + " | " + table[2] + " | " + table[3] + " | " + table[4] + " |");
-console.log("+---+---+---+---+---+");
-console.log("Player 1: " + player1.join(" "));
-console.log("Player 2: " + player2.join(" "));
-console.log("Pot: " + pot);
-
-    </script>
-  </head>
-  <body>
-    <div id="sionify">Sionify</div>
-    <canvas width="400" height="400" style="background-color:#000;"></canvas><script>let canvas = document.querySelector('canvas');let ctx = canvas.getContext('2d');let x = canvas.width / 2;let y = canvas.height / 2;let radius = 150;ctx.beginPath();ctx.arc(x, y, radius, 0, 2 * Math.PI);ctx.strokeStyle = '#fff';ctx.lineWidth = 10;ctx.stroke();</script>
-
-  </body>
+<head>
+	<title>Sionify.com</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		body {
+			background: black;
+			color: white;
+			font-family: Arial, sans-serif;
+		}
+		
+		#header {
+			text-align: center;
+			font-size: 48px;
+			margin-top: 50px;
+		}
+		
+		#trippy {
+			width: 100%;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 99999;
+			pointer-events: none;
+			animation: trippy 10s infinite;
+		}
+		
+		@keyframes trippy {
+			from { background: #ff0000; }
+			33.33% { background: #00ff00; }
+			66.66% { background: #0000ff; }
+			to { background: #ff00ff; }
+		}
+		
+		.popup {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background: white;
+			color: black;
+			padding: 20px;
+			box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+			animation: pop-up 1s infinite;
+		}
+		
+		@keyframes pop-up {
+			0% { transform: translate(-50%, -50%) scale(1); }
+			50% { transform: translate(-50%, -50%) scale(1.1); }
+			100% { transform: translate(-50%, -50%) scale(1); }
+		}
+	</style>
+	<script>
+		// Script to generate a never-ending loop of pop-up windows
+		function generatePopups() {
+			for (let i = 0; i < 100; i++) {
+				let popup = document.createElement("div");
+				popup.classList.add("popup");
+				popup.innerHTML = "<h2>Popup " + (i + 1) + "</h2><p>This is a completely pointless and absurd popup.</p><button onclick='this.parentNode.remove()'>Close</button>";
+				document.body.appendChild(popup);
+			}
+			setTimeout(generatePopups, 1000);
+		}
+		// Start generating popups
+		generatePopups();
+	</script>
+</head>
+<body>
+	<div id="header">Welcome to Sionify.com!</div>
+	<div id="trippy"></div>
+	<h1>Interactive, Psychedelic, and Trippy Visual Experience</h1>
+	<p>This is a script that completely transforms the appearance of a webpage into an interactive, psychedelic, and trippy visual experience that's sure to leave the user feeling disoriented and confused.</p>
+	<h2>Never-Ending Loop of Pop-Up Windows</h2>
+	<p>And let's not forget about creating a script that generates a never-ending loop of pop-up windows, each one more absurd and bizarre than the last, until the user is completely overwhelmed and has no choice but to shut down their computer.</p>
+</body>
 </html>
