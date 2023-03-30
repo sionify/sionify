@@ -1,80 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Sionify.com</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sionify</title>
 	<style>
 		body {
-			background: black;
+			margin: 0;
+			padding: 0;
+			background-color: black;
 			color: white;
-			font-family: Arial, sans-serif;
-		}
-		
-		#header {
+			font-size: 50px;
 			text-align: center;
-			font-size: 48px;
-			margin-top: 50px;
-			z-index: 9999;
-		}
-		
-		#trippy {
-			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 			height: 100%;
-			position: fixed;
-			top: 0;
-			left: 0;
-			z-index: 1;
-			pointer-events: none;
-			animation: trippy 10s infinite;
 		}
-		
-		@keyframes trippy {
-			from { background: #ff0000; }
-			33.33% { background: #00ff00; }
-			66.66% { background: #0000ff; }
-			to { background: #ff00ff; }
+		.sionify {
+			animation: sionify 10s linear infinite;
+			background-size: cover;
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			font-weight: bold;
 		}
-		
-		.popup {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			background: white;
-			color: black;
-			padding: 20px;
-			box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
-			animation: pop-up 1s infinite;
-		}
-		
-		@keyframes pop-up {
-			0% { transform: translate(-50%, -50%) scale(1); }
-			50% { transform: translate(-50%, -50%) scale(1.1); }
-			100% { transform: translate(-50%, -50%) scale(1); }
+		@keyframes sionify {
+			from {
+				background-color: rgb(0, 0, 0);
+			}
+			to {
+				background-color: rgb(
+					Math.floor(Math.random() * 255),
+					Math.floor(Math.random() * 255),
+					Math.floor(Math.random() * 255)
+				);
+			}
 		}
 	</style>
-	<script>
-		// Script to generate a never-ending loop of pop-up windows
-		function generatePopups() {
-			for (let i = 0; i < 100; i++) {
-				let popup = document.createElement("div");
-				popup.classList.add("popup");
-				popup.innerHTML = "<h2>Popup " + (i + 1) + "</h2><p>This is a completely pointless and absurd popup.</p><button onclick='this.parentNode.remove()'>Close</button>";
-				document.body.appendChild(popup);
-			}
-			setTimeout(generatePopups, 1000);
-		}
-		// Start generating popups
-		generatePopups();
-	</script>
 </head>
 <body>
-	<div id="header">Welcome to Sionify.com!</div>
-	<div id="trippy"></div>
-	<h1>Interactive, Psychedelic, and Trippy Visual Experience</h1>
-	<p>This is a script that completely transforms the appearance of a webpage into an interactive, psychedelic, and trippy visual experience that's sure to leave the user feeling disoriented and confused.</p>
-	<h2>Never-Ending Loop of Pop-Up Windows</h2>
-	<p>And let's not forget about creating a script that generates a never-ending loop of pop-up windows, each one more absurd and bizarre than the last, until the user is completely overwhelmed and has no choice but to shut down their computer.</p>
+	<div class="sionify">Sionify</div>
 </body>
 </html>
