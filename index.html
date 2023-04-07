@@ -1,79 +1,94 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Bruh. The Game Early Beta</title>
-<style>
-body { font-family: Arial, sans-serif;
-margin: 0; }
-button { font-size: 24px; padding: 10px; }
-#timer { font-size: 36px; }
+  <title>Bruh. The Game Early Beta</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #222;
+      color: #ff3333;
+    }
 
-        canvas { display: block; }
+    button {
+      font-size: 24px;
+      padding: 10px;
+      background-color: #444;
+      color: #ff3333;
+      border: 2px solid #ff3333;
+    }
 
-</style>
-</head>
+    button:hover {
+      background-color: #ff3333;
+      color: #444;
+    }
 
+    #timer {
+      font-size: 36px;
+    }
+
+    canvas {
+      display: block;
+    }
+  </style>
 </head>
 <body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script>
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
 
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
+    const geometry = new THREE.BoxGeometry();
+    const material = new THREE.MeshBasicMaterial({ color: 0xff3333 });
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
 
-        const geometry = new THREE.BoxGeometry();
-        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-        const cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
+    camera.position.z = 5;
 
-        camera.position.z = 5;
+    const animate = function () {
+      requestAnimationFrame(animate);
 
-        const animate = function () {
-            requestAnimationFrame(animate);
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
 
-            cube.rotation.x += 0.01;
-            cube.rotation.y += 0.01;
+      renderer.render(scene, camera);
+    };
 
-            renderer.render(scene, camera);
-        };
+    animate();
+  </script>
 
-        animate();
-    </script>
+  <p>Press the button to experience the power of Bruh.</p>
+  <h1>Speed Click Game</h1>
+  <button id="clicker">Smash me, baby!</button>
+  <p>Score: <span id="score">0</span></p>
+  <p>Time: <span id="timer">10</span> frickin' seconds</p>
+  <script>
+    let score = 0;
+    let timeLeft = 10;
+    const clicker = document.getElementById('clicker');
+    const scoreElem = document.getElementById('score');
+    const timerElem = document.getElementById('timer');
 
-	<p>Press the button to experience the power of Bruh.</p>
-<h1>Speed Click Game</h1>
-<button id="clicker">Smash me, baby!</button>
-<p>Score: <span id="score">0</span></p>
-<p>Time: <span id="timer">10</span> frickin' seconds</p>
-<script>
-let score = 0;
-let timeLeft = 10;
-const clicker = document.getElementById('clicker');
-const scoreElem = document.getElementById('score');
-const timerElem = document.getElementById('timer');
+    clicker.addEventListener('click', () => {
+      score++;
+      scoreElem.textContent = score;
+    });
 
-clicker.addEventListener('click', () => {
-  score++;
-  scoreElem.textContent = score;
-});
+    const countdown = setInterval(() => {
+      timeLeft--;
+      timerElem.textContent = timeLeft;
+      if (timeLeft === 0) {
+        clearInterval(countdown);
+        clicker.disabled = true;
+        alert('Time\'s up, loser! Your score is: ' + score);
+      }
+    }, 1000);
+  </script>
 
-const countdown = setInterval(() => {
-  timeLeft--;
-  timerElem.textContent = timeLeft;
-  if (timeLeft === 0) {
-    clearInterval(countdown);
-    clicker.disabled = true;
-    alert('Time\'s up, loser! Your score is: ' + score);
-  }
-}, 1000);
-</script>
-
-
-	<button onclick="alert('Bruh')">Bruh</button>
-
+  <button onclick="alert('Bruh')">Bruh</button>
 </body>
 </html>
