@@ -29,21 +29,34 @@
 
     canvas {
       display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .logo-text {
+      font-size: 36px;
+      padding-left: 100px;
     }
   </style>
 </head>
 <body>
+  <div class="header">
+    <h1 class="logo-text">sionify</h1>
+  </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    const renderer = new THREE.WebGLRenderer({ alpha: true });
+    renderer.setSize(100, 100);
+    renderer.setClearColor(0x000000, 0);
     document.body.appendChild(renderer.domElement);
 
     const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshBasicMaterial({ color: 0xff3333 });
+    const material = new THREE.MeshBasicMaterial({ color: 0xff3333, transparent: true, opacity: 0.5 });
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
 
