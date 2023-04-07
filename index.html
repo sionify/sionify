@@ -101,7 +101,31 @@
       }
     }, 1000);
   </script>
+  <canvas id="myCanvas" width="600" height="400"></canvas>
+<script>
+  const canvas = document.getElementById('myCanvas');
+  const ctx = canvas.getContext('2d');
+  
+  function drawRandomRectangles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < 10; i++) {
+      ctx.fillStyle = '#' + Math.floor(Math.random()*16777215).toString(16);
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height;
+      const width = Math.random() * 100;
+      const height = Math.random() * 100;
+      ctx.fillRect(x, y, width, height);
+    }
+  }
 
+  function infiniteZoom() {
+    drawRandomRectangles();
+    ctx.scale(1.01, 1.01);
+    requestAnimationFrame(infiniteZoom);
+  }
+
+  infiniteZoom();
+</script>
   <button onclick="alert('Bruh')">Bruh</button>
 </body>
 </html>
