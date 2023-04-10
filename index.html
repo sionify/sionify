@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -12,7 +13,7 @@
     #console {
       background-color: blue;
       padding: 20px;
-      height: 300px;
+      height: 100vh;
       overflow-y: scroll;
     }
     button {
@@ -100,11 +101,10 @@
       if (isRecording) {
         stopRecording();
         const transcript = consoleDiv.innerHTML;
-        consoleDiv.innerHTML += `🤓: ${transcript}<br>`;
         const summary = await getSummary(transcript);
-        consoleDiv.innerHTML += `🤖: ${summary}<br>`;
+        consoleDiv.innerHTML += `Summary: ${summary}<br>`;
       }
     });
   </script>
 </body>
-</html>```
+</html>
