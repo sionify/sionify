@@ -35,14 +35,46 @@
     const pauseButton = document.getElementById("pauseButton");
     const consoleDiv = document.getElementById("console");
 
-    recordButton.addEventListener("click", () => {
-      consoleDiv.innerHTML += "Recording...<br>";
-      // Add speech-to-text and summarization code here
+    let recognition;
+    let isRecording = false;
+
+    function startRecording() {
+      recognition = new webkitSpeechRecognition();
+      recognition.lang = "en-US";
+      recognition.continuous = true;
+      recognition.interimResults = true;
+
+      recognition.onresult = (event) => {
+        let transcript = event.results[event.results.length - 1][0].transcript;
+        consoleDiv.innerHTML += transcript + '<br>';
+        // Add code to summarize the text and display it in the consoleDiv
+      };
+
+      recognition.onerror = (event) => {
+        console.error('Error occurred in recognition:', event.error);
+      };
+
+      recognition.start();
+      isRecording = true;
+    }
+
+    function stopRecording() {
+      recognition.stop();
+      isRecording = false;
+    }
+
+    recordButton.addEventListener('click', () => {
+      if (!isRecording) {
+        startRecording();
+        consoleDiv.innerHTML += 'Recording...<br>';
+      }
     });
 
-    pauseButton.addEventListener("click", () => {
-      consoleDiv.innerHTML += "Paused.<br>";
-      // Add pause functionality here
+    pauseButton.addEventListener('click', () => {
+      if (isRecording) {
+        stopRecording();
+        consoleDiv.innerHTML += 'Paused.<br>';
+      }
     });
   </script>
 </body>
