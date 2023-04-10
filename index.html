@@ -38,7 +38,33 @@
 
     let recognition;
     let isRecording = false;
-    let fullTranscript = "";
+
+    async function getSummary(text) {
+      try {
+        const response = await axios.post(
+          "https://api.openai.com/v1/engines/davinci-codex/completions",
+          {
+            prompt: `Summarize the following text:\n\n${text}`,
+            max_tokens: 50,
+            n: 1,
+            stop: null,
+            temperature: 0.5,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer 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`,
+            },
+          }
+        );
+
+        const summary = response.data.choices[0].text.trim();
+        return summary;
+      } catch (error) {
+        console.error("Error while getting summary:", error.response);
+        return `Error while getting summary: ${JSON.stringify(error.response.data)}`;
+      }
+    }
 
     function startRecording() {
       recognition = new webkitSpeechRecognition();
@@ -48,7 +74,7 @@
 
       recognition.onresult = (event) => {
         let transcript = event.results[event.results.length - 1][0].transcript;
-        fullTranscript += transcript;
+        consoleDiv.innerHTML += transcript + '<br>';
       };
 
       recognition.onerror = (event) => {
@@ -71,45 +97,14 @@
       }
     });
 
-    pauseButton.addEventListener("click", async () => {
+    pauseButton.addEventListener('click', async () => {
       if (isRecording) {
         stopRecording();
-        const prompt = `Please summarize the following text: ${fullTranscript}`;
-        const response = await getSummary(prompt);
-        consoleDiv.innerHTML += response + '<br>';
-        fullTranscript = "";
+        const transcript = consoleDiv.innerHTML;
+        const summary = await getSummary(transcript);
+        consoleDiv.innerHTML += `Summary: ${summary}<br>`;
       }
     });
-
-    async function getSummary(prompt) {
-      const apiKey = "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";
-      const apiURL = "https://api.openai.com/v1/engines/davinci-codex/completions";
-
-      const headers = {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`
-      };
-
-      const data = {
-        "prompt": prompt,
-        "max_tokens": 50,
-        "n": 1,
-        "stop": null,
-        "temperature": 1
-      };
-
-      try {
-        const response = await axios.post(apiURL, data, { headers: headers });
-        if (response.data.choices && response.data.choices.length > 0) {
-          return response.data.choices[0].text.trim();
-        } else {
-          return "No summary available.";
-        }
-      } catch (error) {
-        console.error("Error while getting summary:", error);
-        return "Error while getting summary.";
-      }
-    }
   </script>
 </body>
 </html>
