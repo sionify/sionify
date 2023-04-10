@@ -39,8 +39,6 @@
     let recognition;
     let isRecording = false;
 
-    const apiKey = process.env.OPENAI_API_KEY;
-
     async function getSummary(text) {
       try {
         const response = await axios.post(
@@ -55,7 +53,7 @@
           {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${apiKey}`,
+              Authorization: `Bearer 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`,
             },
           }
         );
