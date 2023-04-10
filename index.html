@@ -32,6 +32,10 @@
   <button id="pauseButton">Pause</button>
 
   <script>
+    require('dotenv').config();
+    const axios = require('axios');
+    const openaiApiKey = process.env.OPENAI_API_KEY;
+
     const recordButton = document.getElementById("recordButton");
     const pauseButton = document.getElementById("pauseButton");
     const consoleDiv = document.getElementById("console");
@@ -53,7 +57,7 @@
           {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer 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`,
+              Authorization: `Bearer ${openaiApiKey}`,
             },
           }
         );
