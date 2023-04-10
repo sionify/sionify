@@ -24,6 +24,7 @@
       cursor: pointer;
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
   <div id="console"></div>
@@ -35,24 +36,9 @@
     const pauseButton = document.getElementById("pauseButton");
     const consoleDiv = document.getElementById("console");
 
-    let fullTranscript = "";
-
-    recordButton.addEventListener("click", () => {
-      if (!isRecording) {
-        startRecording();
-      }
-    });
-
-    pauseButton.addEventListener("click", () => {
-      if (isRecording) {
-        stopRecording();
-        consoleDiv.innerHTML += fullTranscript + '<br>';
-        fullTranscript = "";
-      }
-    });
-
     let recognition;
     let isRecording = false;
+    let fullTranscript = "";
 
     function startRecording() {
       recognition = new webkitSpeechRecognition();
@@ -62,7 +48,7 @@
 
       recognition.onresult = (event) => {
         let transcript = event.results[event.results.length - 1][0].transcript;
-        fullTranscript += transcript + '<br>';
+        fullTranscript += transcript;
       };
 
       recognition.onerror = (event) => {
@@ -76,6 +62,53 @@
     function stopRecording() {
       recognition.stop();
       isRecording = false;
+    }
+
+    recordButton.addEventListener('click', () => {
+      if (!isRecording) {
+        startRecording();
+        consoleDiv.innerHTML += 'Recording...<br>';
+      }
+    });
+
+    pauseButton.addEventListener("click", async () => {
+      if (isRecording) {
+        stopRecording();
+        const prompt = `Please summarize the following text: ${fullTranscript}`;
+        const response = await getSummary(prompt);
+        consoleDiv.innerHTML += response + '<br>';
+        fullTranscript = "";
+      }
+    });
+
+    async function getSummary(prompt) {
+      const apiKey = "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";
+      const apiURL = "https://api.openai.com/v1/engines/davinci-codex/completions";
+
+      const headers = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`
+      };
+
+      const data = {
+        "prompt": prompt,
+        "max_tokens": 50,
+        "n": 1,
+        "stop": null,
+        "temperature": 1
+      };
+
+      try {
+        const response = await axios.post(apiURL, data, { headers: headers });
+        if (response.data.choices && response.data.choices.length > 0) {
+          return response.data.choices[0].text.trim();
+        } else {
+          return "No summary available.";
+        }
+      } catch (error) {
+        console.error("Error while getting summary:", error);
+        return "Error while getting summary.";
+      }
     }
   </script>
 </body>
