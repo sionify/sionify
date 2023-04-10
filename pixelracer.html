@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PixelRacer</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <script>
+    // Car class
+    class Car {
+      constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.speed = 0;
+      }
+
+      draw() {
+        fill(this.color);
+        rect(this.x, this.y, 30, 15);
+      }
+
+      update() {
+        let acceleration = 0.1;
+        let maxSpeed = 5;
+        let friction = 0.98;
+        this.speed += acceleration;
+        this.speed = constrain(this.speed, 0, maxSpeed);
+        this.x += this.speed;
+        this.speed *= friction;
+      }
+    }
+
+    // Bot class
+    class Bot extends Car {
+      constructor(x, y, color, trackPoints) {
+        super(x, y, color);
+        this.trackPoints = trackPoints;
+        this.currentPoint = 0;
+      }
+
+      update() {
+        let target = this.trackPoints[this.currentPoint];
+        let distance = dist(this.x, this.y, target.x, target.y);
+
+        if (distance < 10) {
+          this.currentPoint++;
+          if (this.currentPoint >= this.trackPoints.length) {
+            this.currentPoint = 0;
+          }
+        }
+
+        let angle = atan2(target.y - this.y, target.x - this.x);
+        this.x += cos(angle) * this.speed;
+        this.y += sin(angle) * this.speed;
+      }
+    }
+
+    let car;
+    let bot;
+    let trackPoints = [];
+
+    function setup() {
+      createCanvas(800, 600);
+      car = new Car(100, 300, randomColor());
+      generateTrack();
+      bot = new Bot(100, 280, color(255, 0, 0), trackPoints);
+    }
+
+    function draw() {
+      background(200);
+      car.update();
+      car.draw();
+      bot.update();
+      bot.draw();
+      drawTrack();
+    }
+
+    function randomColor() {
+      return color(random(255), random(255), random(255));
+    }
+
+    function generateTrack() {
+      let trackLength = 200;
+      let noiseScale = 0.02;
+      for (let i = 0; i < trackLength; i++) {
+        let x = i * 10;
+        let y = noise(i * noiseScale) * height;
+        trackPoints.push(createVector(x, y));
+      }
+    }
+
+    function drawTrack() {
+      stroke(0);
+      strokeWeight(4);
+      noFill();
+      beginShape();
+      for (let point of trackPoints) {
+        vertex(point.x, point.y);
+      }
+      endShape();
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>
