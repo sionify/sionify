@@ -1,130 +1,49 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>Bruh. The Game Early Beta</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commodore 64-style App</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background-color: #222;
-      color: #ff3333;
+      background-color: black;
+      font-family: 'Courier New', monospace;
+      color: white;
     }
-
+    #console {
+      background-color: blue;
+      padding: 20px;
+      height: 300px;
+      overflow-y: scroll;
+    }
     button {
-      font-size: 24px;
-      padding: 10px;
-      background-color: #444;
-      color: #ff3333;
-      border: 2px solid #ff3333;
-    }
-
-    button:hover {
-      background-color: #ff3333;
-      color: #444;
-    }
-
-    #timer {
-      font-size: 36px;
-    }
-
-    canvas {
-      display: block;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
-
-    .logo-text {
-      font-size: 36px;
-      padding-left: 100px;
+      background-color: white;
+      color: black;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="header">
-    <h1 class="logo-text">sionify</h1>
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <div id="console"></div>
+  <button id="recordButton">Record</button>
+  <button id="pauseButton">Pause</button>
+
   <script>
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const recordButton = document.getElementById("recordButton");
+    const pauseButton = document.getElementById("pauseButton");
+    const consoleDiv = document.getElementById("console");
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
-    renderer.setSize(100, 100);
-    renderer.setClearColor(0x000000, 0);
-    document.body.appendChild(renderer.domElement);
-
-    const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshBasicMaterial({ color: 0xff3333, transparent: true, opacity: 0.5 });
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
-
-    camera.position.z = 5;
-
-    const animate = function () {
-      requestAnimationFrame(animate);
-
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
-
-      renderer.render(scene, camera);
-    };
-
-    animate();
-  </script>
-
-  <p>Press the button to experience the power of Bruh.</p>
-  <h1>Speed Click Game</h1>
-  <button id="clicker">Smash me, baby!</button>
-  <p>Score: <span id="score">0</span></p>
-  <p>Time: <span id="timer">10</span> frickin' seconds</p>
-  <script>
-    let score = 0;
-    let timeLeft = 10;
-    const clicker = document.getElementById('clicker');
-    const scoreElem = document.getElementById('score');
-    const timerElem = document.getElementById('timer');
-
-    clicker.addEventListener('click', () => {
-      score++;
-      scoreElem.textContent = score;
+    recordButton.addEventListener("click", () => {
+      consoleDiv.innerHTML += "Recording...<br>";
+      // Add speech-to-text and summarization code here
     });
 
-    const countdown = setInterval(() => {
-      timeLeft--;
-      timerElem.textContent = timeLeft;
-      if (timeLeft === 0) {
-        clearInterval(countdown);
-        clicker.disabled = true;
-        alert('Time\'s up, loser! Your score is: ' + score);
-      }
-    }, 1000);
+    pauseButton.addEventListener("click", () => {
+      consoleDiv.innerHTML += "Paused.<br>";
+      // Add pause functionality here
+    });
   </script>
-  <canvas id="myCanvas" width="600" height="400"></canvas>
-<script>
-  const canvas = document.getElementById('myCanvas');
-  const ctx = canvas.getContext('2d');
-  
-  function drawRandomRectangles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < 10; i++) {
-      ctx.fillStyle = '#' + Math.floor(Math.random()*16777215).toString(16);
-      const x = Math.random() * canvas.width;
-      const y = Math.random() * canvas.height;
-      const width = Math.random() * 100;
-      const height = Math.random() * 100;
-      ctx.fillRect(x, y, width, height);
-    }
-  }
-
-  function infiniteZoom() {
-    drawRandomRectangles();
-    ctx.scale(1.01, 1.01);
-    requestAnimationFrame(infiniteZoom);
-  }
-
-  infiniteZoom();
-</script>
-  <button onclick="alert('Bruh')">Bruh</button>
 </body>
 </html>
