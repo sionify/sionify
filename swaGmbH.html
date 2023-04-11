@@ -56,12 +56,69 @@
     let bulletSpeed = 600;
 
     function create() {
-      // ... All the code from previous steps goes here ...
-    }
+  // Player setup
+  player = this.physics.add.sprite(this.game.config.width / 2, this.game.config.height / 2, 'player');
+  player.setCollideWorldBounds(true);
 
-    function update() {
-      // ... All the code for player movement and rotation goes here ...
-    }
+  // Bullet setup
+  this.bullets = this.physics.add.group({ classType: Bullet, runChildUpdate: true });
+  
+  // Bot setup
+  this.bots = this.physics.add.group();
+  spawnBots.call(this);
+
+  // Timer setup
+  this.killCount = 0;
+  this.killCountText = this.add.text(10, 10, 'Kills: 0', { fontSize: '16px', fill: '#FFF' });
+  this.timer = this.time.addEvent({ delay: 1800000, callback: endGame, callbackScope: this });
+
+  // Input setup
+  cursors = this.input.keyboard.createCursorKeys();
+  this.input.on('pointermove', (pointer) => { player.rotation = Phaser.Math.Angle.Between(player.x, player.y, pointer.x, pointer.y); });
+  this.input.on('pointerdown', (pointer) => { this.fireBullet(pointer); this.sound.play('shootSound'); });
+
+  // Particle and explosion setup
+  this.particles = this.add.particles('particle');
+  this.explosionEffect = this.particles.createEmitter({ speed: 100, scale: { start: 1, end: 0 }, blendMode: 'ADD' });
+
+  // Collisions
+  this.physics.add.collider(this.bullets, this.bots, (bullet, bot) => {
+    bullet.setActive(false);
+    bullet.setVisible(false);
+    bot.setActive(false);
+    bot.setVisible(false);
+
+    this.killCount++;
+    this.killCountText.setText('Kills: ' + this.killCount);
+
+    this.explosionEffect.explode(30, bot.x, bot.y);
+    this.cameras.main.shake(100, 0.01);
+  });
+
+  // Background music setup
+  let backgroundMusic = this.sound.add('backgroundMusic', { loop: true });
+  backgroundMusic.play();
+}
+
+function update() {
+  // Player movement
+  if (cursors.left.isDown) {
+    player.setVelocityX(-200);
+  } else if (cursors.right.isDown) {
+    player.setVelocityX(200);
+  } else {
+    player.setVelocityX(0);
+  }
+
+  if (cursors.up.isDown) {
+    player.setVelocityY(-200);
+  } else if (cursors.down.isDown) {
+    player.setVelocityY(200);
+  } else {
+    player.setVelocityY(0);
+  }
+}
+
 
     // ... All other functions from previous steps go here ...
   </script>
