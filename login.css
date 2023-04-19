@@ -18,3 +18,7 @@ label {
 input[type="text"], input[type="password"] {
     margin-bottom: 20px;
 }
+label a {
+    color: white;
+    text-decoration: none;
+}
