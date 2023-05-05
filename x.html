@@ -1,38 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test API</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Visualization</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #111;
+        }
+
+        #canvas {
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
 <body>
-  <h1>Test API</h1>
-  <script src="nftgen1.js"></script>
-  <script>
-    const API_URL = "https://g7ac7ci1s8.execute-api.eu-north-1.amazonaws.com/pkboe-api";
+    <input type="file" id="fileInput" accept="audio/*">
+    <canvas id="canvas" width="800" height="600"></canvas>
 
-    async function fetchData() {
-      try {
-        const response = await fetch(API_URL, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json"
-          }
-        });
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
 
-        if (response.ok) {
-          const data = await response.json();
-          console.log(data);
-          // Verarbeiten Sie die Daten hier, z.B. Anzeigen auf der Webseite
-        } else {
-          console.error(`Fehler: ${response.status} - ${response.statusText}`);
+        let audioContext = null;
+        let audioSourceNode = null;
+        let analyserNode = null;
+
+        function initializeAudioContext() {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            analyserNode = audioContext.createAnalyser();
+            analyserNode.fftSize = 2048;
         }
-      } catch (error) {
-        console.error(`Fehler beim Abrufen der Daten: ${error}`);
-      }
-    }
 
-    fetchData();
-  </script>
-</body>
-</html>
+        function playAudio(file) {
+            if (!audioContext) {
+                initializeAudioContext();
+            } else if (audioSourceNode) {
+                audioSourceNode.disconnect();
+            }
+
+            audioContext.decodeAudioData(file, (buffer) => {
+                audioSourceNode = audioContext.createBufferSource();
+                audioSourceNode.buffer = buffer;
+                audioSourceNode.connect(analyserNode);
+                analyserNode.connect(audioContext.destination);
+                audioSourceNode.start(0);
+                visualize();
+            });
+        }
+
+        function getRandomShape() {
+            const shapes = ['rect', 'circle', 'line'];
+            return shapes[Math.floor(Math.random() * shapes.length)];
+        }
+
+        function drawShape(shape, x, y, size, color) {
+            ctx.beginPath();
+            ctx.fillStyle = color;
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 2;
+
+            if (shape === 'rect') {
+                ctx.rect(x - size / 2, y - size / 2, size, size);
+                ctx.fill();
+            } else if (shape === 'circle') {
+                ctx.arc(x, y, size / 2, 0, Math.PI * 2);
+                ctx.fill();
+            } else if (shape === 'line') {
+                ctx.moveTo(x, y);
+                ctx.lineTo(x + size / 2, y + size / 2);
+                ctx.stroke();
+            }
+
+            ctx.closePath();
+        }
+
+        function visualize() {
+            const bufferLength = analyserNode.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            let zoom = 1;
+
+            function renderFrame() {
+                requestAnimationFrame(renderFrame);
+                analyserNode.getByteFrequencyData(dataArray);
+
+                ctx.save();
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.translate(canvas.width / 2, canvas.height / 2);
+                ctx.scale(zoom, zoom);
+                ctx.translate(-canvas.width / 2, -canvas.height / 2);
+
+                for (let i = 0; i < bufferLength; i++) {
+                    const x = Math.random
